@@ -1,0 +1,77 @@
+basePath: /
+definitions:
+  model.Payment:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: string
+      orderID:
+        type: string
+      paymentStatus:
+        $ref: '#/definitions/model.PaymentStatus'
+      totalAmount:
+        description: price * quantity
+        type: number
+      updatedAt:
+        type: string
+    type: object
+  model.PaymentStatus:
+    enum:
+    - PENDING
+    - PAID
+    - CANCELLED
+    - REFUND STARTED
+    - REFUND COMPLETE
+    type: string
+    x-enum-varnames:
+    - Pending
+    - Paid
+    - Cancelled
+    - RefundStarted
+    - RefundComplete
+info:
+  contact: {}
+  description: This is a Simple application for checking payments status
+  title: Payment Service API
+  version: "1.0"
+paths:
+  /payments:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of model.Payment
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Payment'
+            type: array
+      summary: Get all Payments
+      tags:
+      - Payment
+  /payments/{orderid}:
+    get:
+      consumes:
+      - application/json
+      description: Get a payment
+      parameters:
+      - description: order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Payment'
+      summary: Get Payment by OrderID
+      tags:
+      - Payment
+swagger: "2.0"
