@@ -41,7 +41,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/payments/{orderid}": {
+        "/payments/{order-id}": {
             "get": {
                 "description": "Get a payment",
                 "consumes": [
@@ -56,7 +56,7 @@ const docTemplate = `{
                 "summary": "Get Payment by OrderID",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "order ID",
                         "name": "id",
                         "in": "path",

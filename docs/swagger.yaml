@@ -53,7 +53,7 @@ paths:
       summary: Get all Payments
       tags:
       - Payment
-  /payments/{orderid}:
+  /payments/{order-id}:
     get:
       consumes:
       - application/json
@@ -63,7 +63,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:

@@ -47,26 +47,26 @@ func (paym *PaymentRepository) CreatePayment(paymentCreateDTO *model.PaymentCrea
 	return newPayment, nil
 }
 
-func (ord *PaymentRepository) UpdateStatus(id uuid.UUID, status string) error {
+func (pay *PaymentRepository) UpdateStatus(id uuid.UUID, status string) error {
 	var updatepayment model.Payment
-	err := ord.DB.Model(&updatepayment).Where("order_id = ?", id).Update("payment_status", status).Error
+	err := pay.DB.Model(&updatepayment).Where("order_id = ?", id).Update("payment_status", status).Update("updated_at", time.Now()).Error
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (ord *PaymentRepository) GetPaymentByOrderId(orderid uuid.UUID) (*model.Payment, error) {
+func (pay *PaymentRepository) GetPaymentByOrderId(orderid uuid.UUID) (*model.Payment, error) {
 	var payment model.Payment
-	if err := ord.DB.First(&payment, orderid).Error; err != nil {
+	if err := pay.DB.Where("order_id", orderid).First(&payment).Error; err != nil {
 		return nil, err
 	}
 	return &payment, nil
 }
 
-func (ord *PaymentRepository) GetPayments() ([]model.Payment, error) {
+func (pay *PaymentRepository) GetPayments() ([]model.Payment, error) {
 	var payments []model.Payment
-	err := ord.DB.Find(&payments).Error
+	err := pay.DB.Find(&payments).Error
 	if err != nil {
 		return nil, err
 	}

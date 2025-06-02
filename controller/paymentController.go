@@ -16,11 +16,11 @@ type PaymentController struct {
 // @Tags Payment
 // @Accept json
 // @Produce json
-// @Param id path int true "order ID"
+// @Param id path string true "order ID"
 // @Success 200 {object} model.Payment
-// @Router /payments/{orderid} [get]
+// @Router /payments/{order-id} [get]
 func (oc *PaymentController) GetPaymentByOrderID(ctx iris.Context) {
-	idParam := ctx.Params().Get("orderid")
+	idParam := ctx.Params().Get("order-id")
 	id, err := uuid.Parse(idParam)
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
