@@ -37,6 +37,6 @@ func main() {
 		ctx.WriteString("Hello, World from payments!")
 	})
 	app.Get("/payments", paymentHandler.GetPayments)
-	app.Get("/paymentbyorderid/{order-id}", paymentHandler.GetPaymentByOrderID)
+	app.Get("/paymentbyorderid/{id}", paymentHandler.GetPaymentByOrderID)
 	app.Listen(":8080")
 }
